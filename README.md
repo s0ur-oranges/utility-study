@@ -1,5 +1,5 @@
 # Study-Buddy
- A utility app for students containing functions like making notes , add deadlines for homeworks , create to-do lists , and finally an article summariser. To read about the article summariser , please visit 
+ A utility app for students containing functions like making notes , add deadlines for homeworks , create to-do lists , and finally an article summariser. To read about the article summariser , please visit https://github.com/s0ur-oranges/text-summarization-app
  
 ## Overview
  

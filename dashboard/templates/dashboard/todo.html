@@ -1,0 +1,70 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    .demo {
+   display: none;
+}
+
+
+.btn2
+{
+    border:none;
+    background-color:rgb(83,104,120);
+    padding:10px;
+    border-radius:5px;
+}
+</style>
+
+<br>
+<div class="container">
+    {% if not todos_done %}
+    <table class="table table-striped table-bordered table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos%}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{todo.title}}</td>
+                <td><a href="{% url 'delete-todo' todo.id %}"><i class="fa fa-trash fa-2x"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4>All tasks have been done!! create to add more</h4>
+
+{% endif %}
+</div><br><br>
+
+<div class="container">
+    <button type='button' class="btn2"> Create Todo </button>
+    <div class="container demo" id="demo">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+        {{form|crispy}}
+    </fieldset>
+        <div class="form-group">
+            <button href="" class="btn2" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>var tag = document.getElementById('demo');
+    var button = document.querySelector('button');
+    button.addEventListener('click', function(){
+    tag.classList.toggle('demo');
+    });</script>
+
+{% endblock content %}

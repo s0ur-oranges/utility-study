@@ -1,0 +1,562 @@
+
+
+{% extends 'dashboard/base.html' %} 
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Student-dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+<style>
+    @import url(//fonts.googleapis.com/css?family=Abril+Fatface|Droid+Serif:400,700,400italic,700italic);
+html,body{
+  height:100%;
+  overflow:visible;
+}
+body {
+  background: linear-gradient(to bottom, rgba(0,5,10,0.4) 0%,rgba(0,0,0,0) 100%);
+  font-family: 'Droid Serif', serif;
+}
+
+
+.blog-card {
+  max-width: 550px;
+  width:100%;
+  height: 20%;
+  font-family: 'Droid Serif', serif;
+  color:#fff;
+  top: 20%;
+  right: 0;  
+  left: 0;
+  margin: 0 auto;
+  margin-bottom:20px;
+  margin-top:20px;
+  overflow: hidden;
+  border-radius: 0px;
+  box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  transition:all 0.4s;
+  background: url(https://unsplash.it/600/800?image=1061) center no-repeat;
+  background-size: 100%;
+}
+.blog-card a{ 
+color:#fff;
+  text-decoration:none;
+  transition:all 0.2s
+}
+.blog-card .color-overlay {
+  background: rgba(64, 84, 94,0.5);
+  width: 550px;
+  height: 500px;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  transition: background 0.3s cubic-bezier(0.33, 0.66, 0.66, 1);
+}
+.blog-card .gradient-overlay {  
+  background-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.6) 21%);
+  width: 550px;
+  height: 500px;
+  top: 350px;
+  left: 0;
+  z-index: 15;
+}
+.blog-card:hover{
+    box-shadow: 0px 18px 20px -9px rgba(0, 10, 30, 0.75);
+}
+.blog-card:hover .card-info {
+  opacity: 1;
+  bottom: 100px;
+}
+.blog-card:hover .color-overlay {
+  background: rgba(64, 64, 70,0.8);
+}
+.blog-card:hover .title-content{
+  margin-top:70px
+}
+.title-content {
+  text-align: center;
+  margin: 170px 0 0 0;
+  z-index: 20;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition:all 0.6s
+}
+
+.blog-card:hover h3:after{
+ 
+  animation: changeLetter 0.3s 1 linear;
+  width:80%
+}
+
+.blog-card h3,h1 {
+  font-size: 1.9em;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: 'Abril Fatface', serif;
+  margin-bottom: 0;
+  display:inline-block;
+}
+.blog-card h3 a{  
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  
+  transition:all 0.2s
+}
+.blog-card h3 a:hover{
+  text-shadow: 0px 8px 20px rgba(0, 0, 0, 0.95);
+}
+h3:after {
+  content: " ";
+  display: block; 
+  width: 10%;
+  height: 2px;
+  margin: 20px auto;
+  border: 0;
+  background: #BDA26B;
+  transition:all 0.2s
+}
+
+@keyframes changeLetter {
+  0% {
+    width: 10%;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+.intro {
+  width: 170px;
+  margin: 0 auto;
+  color: #ddd;
+  font-style: italic;
+  line-height: 18px;
+}
+.intro a{
+  color: #ddd
+}
+.intro a:hover{
+  text-decoration:underline
+}
+.card-info {
+   box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  bottom: -40px;
+  left: 0;
+  margin: 0 auto;
+  padding: 0 50px;
+  font-style: 16px;
+  line-height: 24px;
+  z-index: 20;
+  opacity: 0;
+  transition: bottom 0.64s, opacity 0.63s cubic-bezier(0.33, 0.66, 0.66, 1);
+}
+
+.card-info a{
+  display:block;
+  width:100px;
+  margin:15px auto;
+  background:#fff;
+  color:#444;
+  padding:3px 10px;
+  border-radius:2px;
+  font-size:0.8em
+}
+.card-info a:hover{
+  background: #8e7c49;
+  color:#fff;
+}
+.card-info a:hover span{
+   filter: brightness(10);
+   opacity:1
+}
+
+@media (max-width:500px){
+  .card-info{
+    display:none
+  }
+  .blog-card:hover .title-content,.title-content{
+  margin-top:40px
+}
+.blog-card{
+  height:300px
+}
+.blog-card h3{
+  font-size:1.3em
+}
+.intro{
+  font-size:0.8em
+}
+}
+
+
+/*  ================  */
+
+/* ignore this bit :P */
+#profile-badges:after {
+    content: "BRO";
+    font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+    font-size:13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 1px 4px 1px 4px;
+    color: black !important;
+    border-radius: 3px;
+    position: relative;
+    top: -2px;
+    text-shadow: none !important;
+    white-space: nowrap;
+    letter-spacing: 0;
+    background: #FFDD40;
+}
+.profile-header{ background:#333 url(https://images.unsplash.com/photo-1435783099294-283725c37230?dpr=1&auto=compress,format&fit=crop&w=1376&h=635&q=80&cs=tinysrgb&crop=&bg=) top center no-repeat; background-size:cover; font-size:3em;position:relative}
+.profile-header:after{
+  position:absolute;
+  content:"";
+  display:block;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  background:rgba(23, 23, 31, 0.42);
+  z-index:0
+}
+#profile-links a{
+  font-family: 'Abril Fatface', serif;
+  font-size:1.2em
+}
+
+
+.profile-links a[href*=nodws\.com]:before{
+    content:"\2616";
+    color:#0a45b5;
+    padding-right:3px
+}
+
+.profile-links a[href*=twitter]:before{
+    content:"\1f426";
+    color:#08c
+}
+
+.profile-links a[href*=dribbble]:before{
+    content:"\26BE";
+    color:#d055bf
+}
+#following-this-user{
+  pointer-events:none
+}
+#follow-this-user{
+    font-size:1.2em;
+    border-color:#359ef9
+}
+#follow-this-user:after{
+    content:"\1f448"
+}
+.links-and-stats {
+    background: rgb(20, 20, 21);
+}
+.profile-name h1 {
+   text-shadow:0 6px 9px rgba(0, 0, 0, 0.48)
+}
+.profile-avatar {
+    bottom: -10px;
+    width: 150px;
+    height: 150px;
+    border: 0px solid #1E1E1E;
+    background: rgba(2, 2, 2, 0.49);
+    box-shadow:0 19px 19px -10px rgba(0, 0, 0, 0.63)
+}
+.profile-username, .upsell,.profile-location,.primary-pro{
+  opacity:0;
+}
+.upsell,#pen-as-header-question{
+  display:none
+}
+.profile-nav-1 a{
+  font-size:1.2rem;
+}
+.profile-bio, .profile-nav-1 a.active,.profile-nav-1 a:hover {
+    color: rgba(20, 20, 21, 0.59) !important;
+    font-size: 1.2rem
+}
+.meta .pen-title {
+  font-family: 'Droid Serif', serif;
+  text-align:center
+}
+.pagination-button{
+  background-color:#2f2f31;
+  border-color:#2f2f31;
+  transition:all 0.2s
+}
+.pagination-button:hover{
+  box-shadow:0 3px 8px rgba(0,0,0,0.2)
+}
+.single-project .stats,.single-pen .stats {
+    text-align:center;
+    width:100%
+}
+.stats svg {
+    fill: #bda26b;
+}
+.stats svg, .loves .icon-heart {
+    fill: rgba(47, 47, 49, 0) !important;
+    stroke:#ba6 !important;
+    stroke-width:0.1em !important;
+}
+.loves .icon-heart {
+   stroke-width:0.5em !important;
+}
+.comments svg {
+   stroke-width:0.35em !important;
+}
+.single-stat.loves.loved-1 svg
+{
+    stroke:#fff !important
+}
+
+.single-pen:hover h3:after{
+    width:40%;
+    transition:all 0.2s
+}
+.pen-actions{
+  border:0px !important
+}
+.meta{
+  box-shadow:none !important
+}
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i');
+html,body{
+  margin:0;
+  height:120%;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+a{
+  text-decoration:none
+}
+.header{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  height:70vw;
+  min-height:400px;
+  max-height:750px;
+  min-width:300px;
+  color:#eee;
+}
+.header:after{
+  content:"";
+  width:100%;
+  height:150%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  z-index:-1;
+ background: linear-gradient(to bottom, rgba(0,0,0,0.12) 40%,rgba(27,32,48,1) 100%);
+}
+.header:before{
+  content:"";
+  width:100%;
+  height:240%;
+  position:absolute;
+  top:0;
+  left:0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0); backface-visibility: hidden;
+  scale:(1.0, 1.0);
+    transform: translateZ(0);
+  background:#1B2030 url("{% static 'images/background.jpg' %}") 1% 0 no-repeat;
+  background-size:110%;
+  background-attachment:fixed;
+  animation: grow 200s  linear 6ms infinite;
+  transition:all 0.4s ease-in-out;
+  z-index:-2
+}
+.header a{
+  color:#eee
+}
+
+.logo{
+  border:2px solid #fff;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  align-content:center;
+  margin:20px;
+  padding:0px 10px;
+  font-weight:900;
+  font-size:1.1em;
+  line-height:1;
+  box-sizing:border-box;
+  height:40px
+}
+.sides, .info{
+  flex: 0 0 auto;
+  width:50%
+}
+.info{
+  width:100%;
+  padding:10%;
+  text-align:center;
+  text-shadow:0 2px 3px rgba(0,0,0,0.2)
+}
+
+.info h4, .meta{
+  font-size:0.7em
+}
+.meta{
+  font-style:italic;
+}
+@keyframes grow{
+  0% { transform: scale(1) translateY(0px)}
+  50% { transform: scale(1.2) translateY(-400px)}
+}
+.content{
+  text-align:center;
+  margin-left:30px;
+  margin-right:30px;
+  color:#2f2f31;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size:18px;
+}
+.btn{
+  color:#333;
+  border:2px solid;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-block;
+  padding:5px 10px;
+  font-weight:600
+}
+
+.twtr{
+  margin-top:100px
+}.btn.twtr:after{content:"\1F426";padding-left:5px}
+
+#start
+{
+  border-radius:30px;
+  border:none;
+  padding:10px;
+  display:block;
+  margin-left:550px;
+  margin-top:20px;
+}
+
+</style>
+
+<div class="header">
+   
+    <div class="info">
+      <h3>StudyBuddy</h3>
+      <h1>All in one utility app for students</h1>
+      <button id="start"><a href="#bottom" style="color:black">Get Started</a></button>
+    </div>
+  </div>
+  <br><br>
+  <section class="content">
+      This is the perfect utility app for students. Create and manage deadlines for homeworks and assignments , create to-do lists and make notes. Organise everything at one place. 
+      A wonderful feature is the Article Summarisation section , it allows you to generate an automated summary of any long paragraph.
+  </section>
+
+  <br><br>
+  <section class="container text-center" id="bottom">
+    <h3>Get Started</h3>
+  
+    <hr> <br>
+    <div class="row">
+      <div class="col-md-3">
+        <a href="{% url 'notes' %}">
+          <div class="card" style="box-shadow: 15px 15px 10px grey;">
+            <img class="card-img-top" src="{% static 'images/notes.jpg' %}" alt="Notes image">
+            <div class="card-body">
+              <h5 class="card-title ">
+                Notes
+              </h5>
+              Create Notes to refer them later. They are stored permanently until deleted
+            </div>
+          </div>
+        </a>
+      </div>
+  
+      <div class="col-md-3">
+        <a href="{% url 'homework' %}">
+          <div class="card" style="box-shadow: 15px 15px 10px grey">
+            <img class="card-img-top" src="{% static 'images/homework.jpg' %}" alt="homeworkimage">
+            <div class="card-body">
+              <h5 class="card-title ">
+                Homework
+              </h5>
+              Add homeworks and assign them deadlines. They will be displayed prioritised by deadlines
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="https://s0ur-oranges-text-summarization-app-w4i17h.streamlitapp.com/">
+          <div class="card" style="box-shadow: 15px 15px 10px grey">
+            <img class="card-img-top" src="{% static 'images/summary.jpg' %}" alt="summary image">
+            <div class="card-body">
+              <h5 class="card-title ">
+                Text Summarization
+              </h5>
+             Get the most important points and a summary of any article.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="{% url 'todo' %}">
+          <div class="card" style="box-shadow: 15px 15px 10px grey">
+            <img class="card-img-top" src="{% static 'images/todo.jpg' %}" alt="todo image">
+            <div class="card-body">
+              <h5 class="card-title ">
+                To Do
+              </h5>
+              Add your to-do lists for your day and remove them as you finish
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br><br>
+  </section>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Student-dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@1,200&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Noto+Serif+Display:ital,wght@1,200&family=Square+Peg&display=swap" rel="stylesheet">
+
+  <style>
+    .logo{
+  border:2px solid #fff;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  align-content:center;
+  margin:20px;
+  padding:0px 10px;
+  font-weight:900;
+  font-size:1.1em;
+  line-height:1;
+  box-sizing:border-box;
+  height:40px;
+  color:white;
+  font-family: 'BhuTuka Expanded One', cursive;
+
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar-expand-lg navbar-dark bg-dark">
+      <div class="allTheContent" style="display:flex">
+        <div class="logo">
+          <a>studybuddy</a>
+        </div>
+      <div class="container-fluid" style="margin-top:15px">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'profile' %}">Profile</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'todo' %}">Todo</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'notes' %}">Notes</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="https://s0ur-oranges-text-summarization-app-w4i17h.streamlitapp.com/">Summariser</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'homework' %}">Homework</a>
+            </li>
+
+           
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+
+            {% endif %}
+          </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+    {% block content %}
+    {% endblock content %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
